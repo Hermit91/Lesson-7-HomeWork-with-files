@@ -1,9 +1,31 @@
 plugins {
     id 'java'
+    id "io.qameta.allure" version "2.9.6"
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
 }
 
 repositories {
     mavenCentral()
+}
+
+allure {
+    report {
+        version.set("2.16.1");
+    }
+    adapter {
+        autoconfigure.set(true)
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                autoconfigureListeners.set(true)
+                adapterVersion.set("2.16.1")
+                enabled.set(true)
+            }
+        }
+    }
 }
 
 dependencies {
@@ -12,6 +34,7 @@ dependencies {
             'com.codeborne:pdf-test:1.7.0',
             'com.codeborne:xls-test:1.2',
             'com.opencsv:opencsv:5.5.2',
+            "io.qameta.allure:allure-selenide:2.16.1",
             'org.junit.jupiter:junit-jupiter:5.8.1',
             'com.codeborne:selenide:6.0.3'
     )
